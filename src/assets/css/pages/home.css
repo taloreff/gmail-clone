@@ -1,12 +1,18 @@
 .home {
     text-align: center;
+    height: 100%;
 }
 
 .home h1 {
     font-size: 40px;
-    margin: 10px;
+    margin: 50px 0;
 }
 
 .home img {
     width: 500px;
+    margin-top: 150px;
+}
+
+.home img:hover {
+    cursor: pointer;
 }
