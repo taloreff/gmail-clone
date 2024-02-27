@@ -14,34 +14,18 @@ export function EmailFilter({ filterBy, onSetFilter }) {
     }
 
     function handleChange(ev) {
-        let { value, name: field, type } = ev.target
-        value = type === 'number' ? +value : value
-        setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
-        console.log('filterByToEdit', filterByToEdit);
+        let { value } = ev.target
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, subject: value, body: value, from: value, to: value }))
     }
 
     return <form className="email-filter" onSubmit={onSubmitFilter} >
-        <label >Type
-            <input
-                type="text"
-                placeholder="Search by type"
-                value={filterByToEdit.type}
-                name="type"
-                onChange={handleChange}
-            />
-        </label>
-
-        <label htmlFor="status">Battery</label>
         <input
-            type="number"
-            id="status"
-            name="minBatteryStatus"
-            placeholder="Search by battery"
-            value={filterByToEdit.minBatteryStatus}
+            type="text"
+            placeholder="Search mail"
+            value={filterByToEdit.type}
+            name="mail"
             onChange={handleChange}
         />
-
-        <button>Filter</button>
     </form>
 }
 

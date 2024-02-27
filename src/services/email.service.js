@@ -37,11 +37,10 @@ function remove(id) {
 }
 
 function save(emailToSave) {
-    if (emailToSave.id) {
+    console.log(emailToSave._id)
+    if (emailToSave._id) {
         return storageService.put(STORAGE_KEY, emailToSave)
     } else {
-        emailToSave.isRead = false
-        emailToSave.isStarred = false
         return storageService.post(STORAGE_KEY, emailToSave)
     }
 }
@@ -61,7 +60,6 @@ function createEmail(subject = '', body = '', isRead, isStarred, sentAt, removed
 
 function getDefaultFilter() {
     return {
-        id: utilService.makeId(),
         subject: '',
         body: '',
         isRead: false,

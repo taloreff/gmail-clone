@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { emailService } from '../services/email.service'
 import { EmailList } from "../cmps/EmailList";
-import { EmailFilter } from "../cmps/EmailFilter";
+import { EmailNav } from "../cmps/EmailNav";
 
 export function EmailIndex() {
     const [emails, setEmails] = useState(null)
@@ -28,7 +28,7 @@ export function EmailIndex() {
         try {
             await emailService.remove(emailId)
             setEmails(prevEmails => {
-                return prevEmails.filter(email => email.id !== emailId)
+                return prevEmails.filter(email => email._id !== emailId)
             })
         } catch (error) {
             console.log('Error in onRemoveEmail', error)
@@ -38,7 +38,7 @@ export function EmailIndex() {
     async function onUpdateEmail(email) {
         try {
             const updatedEmail = await emailService.save(email)
-            setEmails(prevEmails => prevEmails.map(currEmail => currEmail.id === updatedEmail.id ? updatedEmail : currEmail))
+            setEmails(prevEmails => prevEmails.map(currEmail => currEmail._id === updatedEmail._id ? updatedEmail : currEmail))
         } catch (error) {
             console.log('Error in onUpdateEmail')
         }
@@ -48,8 +48,7 @@ export function EmailIndex() {
 
     return (
         <section className="email-index">
-            <h1>Welcome to Email page</h1>
-            <EmailFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+            <EmailNav filterBy={filterBy} onSetFilter={onSetFilter} />
             <EmailList
                 emails={emails}
                 onRemoveEmail={onRemoveEmail}

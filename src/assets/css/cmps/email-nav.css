@@ -1,0 +1,51 @@
+.email-nav {
+    grid-row: 2;
+    background: transparent;
+    color: rgb(71, 71, 71);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.email-nav section.container {
+    display: flex;
+    align-items: center;
+
+}
+
+.email-nav h1.logo {
+    flex-grow: 1;
+    font-weight: 600;
+}
+
+.email-nav .back {
+    flex-grow: 1;
+}
+
+.email-nav nav a:not(:last-child) {
+    margin-right: 10px;
+}
+
+.email-nav section.container>section {
+    flex-grow: 1;
+}
+
+.email-nav .logo-img {
+    width: 100px;
+    margin-left: 20px;
+}
+
+.email-filter input {
+    border-radius: 10px;
+    border: none;
+    background-color: #eaf1fb;
+    margin-right: 100px;
+    padding: 10px;
+    width: 100%;
+}
+
+.email-filter input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: white;
+}

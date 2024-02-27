@@ -4,7 +4,7 @@ import { EmailPreview } from "./EmailPreview";
 export function EmailList({ emails, onRemoveEmail, onUpdateEmail }) {
     return (
         <ul className="emails-list">
-            {emails.map(email => <li key={email.id}>
+            {emails.map(email => <li key={email._id}>
                 <EmailPreview email={email}
                     onRemoveEmail={onRemoveEmail}
                     onUpdateEmail={onUpdateEmail} />

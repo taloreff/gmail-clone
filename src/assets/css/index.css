@@ -7,5 +7,9 @@
 /* Pages */
 @import "./pages/home.css";
 @import "./pages/about-us.css";
+
 /* Components */
 @import "./cmps/app-header.css";
+@import "./cmps/email-nav.css";
+@import "./cmps/email-index.css";
+@import "./cmps/email-preview.css";
