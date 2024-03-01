@@ -11,6 +11,6 @@ export function EmailNav({ filterBy, onSetFilter }) {
 }
 
 EmailNav.propTypes = {
-    filterBy: PropTypes.array.isRequired,
+    filterBy: PropTypes.object.isRequired,
     onSetFilter: PropTypes.func.isRequired,
 };

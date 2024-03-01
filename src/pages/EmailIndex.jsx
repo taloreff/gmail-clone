@@ -49,10 +49,12 @@ export function EmailIndex() {
     return (
         <section className="email-index">
             <EmailNav filterBy={filterBy} onSetFilter={onSetFilter} />
-            <EmailList
-                emails={emails}
-                onRemoveEmail={onRemoveEmail}
-                onUpdateEmail={onUpdateEmail} />
+            <div className="list-container">
+                <EmailList
+                    emails={emails}
+                    onRemoveEmail={onRemoveEmail}
+                    onUpdateEmail={onUpdateEmail} />
+            </div>
         </section>
     )
 }

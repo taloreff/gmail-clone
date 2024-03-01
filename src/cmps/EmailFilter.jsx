@@ -30,6 +30,6 @@ export function EmailFilter({ filterBy, onSetFilter }) {
 }
 
 EmailFilter.propTypes = {
-    filterBy: PropTypes.array.isRequired,
+    filterBy: PropTypes.object.isRequired,
     onSetFilter: PropTypes.func.isRequired,
 };

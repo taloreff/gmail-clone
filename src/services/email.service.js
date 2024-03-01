@@ -12,6 +12,11 @@ export const emailService = {
 
 const STORAGE_KEY = 'emails'
 
+const loggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
+
 _createEmails()
 
 async function query(filterBy) {
@@ -82,7 +87,7 @@ function _createEmails() {
                 type: 'Cooking',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
+                sentAt: 1554993990900,
                 removedAt: null,
                 from: 'momo@momo.com',
                 to: 'user@appsus.com'
@@ -95,7 +100,7 @@ function _createEmails() {
                 type: 'Software',
                 isRead: true,
                 isStarred: true,
-                sentAt: 1551133930598,
+                sentAt: 1551000000000,
                 removedAt: null,
                 from: 'popo@popo.com',
                 to: 'user@appsus.com'
@@ -108,7 +113,7 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930599,
+                sentAt: 1551133930594,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'

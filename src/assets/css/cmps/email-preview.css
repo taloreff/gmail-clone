@@ -1,8 +1,18 @@
 .email-preview {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 60px 250px auto 70px;
+    gap: 20px;
     padding: 10px 0;
+    position: relative;
+    /* Add position: relative to the email-preview */
+}
+
+.email-preview.read {
+    background-color: #e7f1ff;
+}
+
+.email-preview.unread {
+    background-color: #fff;
 }
 
 .email-preview:hover {
@@ -13,25 +23,66 @@
 }
 
 .email-preview:hover .email-actions {
-    display: block;
+    opacity: 1;
+}
+
+.email-preview:hover .email-date {
+    opacity: 0;
 }
 
 .email-preview .email {
-    display: flex;
+    grid-column: 1/4;
+    display: grid;
+    grid-template-columns: subgrid;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
+}
+
+.email .email-star {
+    grid-column: 1;
 }
 
 .email-preview .email>* {
     padding-left: 20px;
 }
 
-.email-actions {
-    display: none
+.email-content {
+    grid-column: 2/4;
+    display: grid;
+    align-items: center;
+    grid-template-columns: subgrid;
 }
 
+.email-content .email-body {
+    grid-column: 2;
+    text-wrap: nowrap;
+}
 
+.email-content .email-subject {
+    grid-column: 1;
+    text-wrap: nowrap;
+}
+
+.email-preview.unread .email-content .email-subject h4,
+.email-preview.unread .email-content .email-body h5 {
+    font-weight: 700;
+}
+
+.email-date,
+.email-actions {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    z-index: 1;
+}
+
+.email-date {
+    opacity: 1;
+}
+
+.email-actions {
+    opacity: 0;
+}
 
 .email-actions button {
     background-color: transparent;
@@ -39,7 +90,7 @@
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    margin-right: 5px;
+    margin-right: 4px;
 }
 
 .email-actions button:hover {
