@@ -13,24 +13,39 @@ export function EmailPreview({ email, onRemoveEmail, onUpdateEmail }) {
     }
 
     function handleReadClick() {
-        onUpdateEmail({ ...email, isRead: !email.isRead })
+        onUpdateEmail({ ...email, isRead: true })
     }
 
     const shortSubject = email.subject.length > 30 ? email.subject.substring(0, 30) + '...' : email.subject;
     const shortBody = email.body.length > 80 ? email.body.substring(0, 80) + '...' : email.body;
+
     const emailDate = new Date(email.sentAt);
-    const monthName = emailDate.toLocaleString('default', { month: 'short' }); // Get short month name (e.g., Jan, Feb)
-    const monthNumber = emailDate.getMonth() + 1;
+    const currentMonth = new Date().getMonth() + 1;
+    const currentYear = new Date().getFullYear();
+
+    let dateDisplay;
+    if (emailDate.getMonth() + 1 === currentMonth && emailDate.getFullYear() === currentYear) {
+        // If the email date is in the current month and year, display the time
+        const hours = emailDate.getHours();
+        const minutes = emailDate.getMinutes();
+        dateDisplay = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+    } else {
+        // Otherwise, display the month name and number
+        const monthName = emailDate.toLocaleString('en', { month: 'short' });
+        const monthNumber = emailDate.getMonth() + 1;
+        dateDisplay = `${monthName} ${monthNumber}`;
+    }
+
 
     return <article className={`email-preview ${email.isRead ? "read" : 'unread'}`} >
         <div className="email">
-            <EmailStar email={email} handleStarClick={handleStarClick} />
-            <Link to={`/email/${email._id}`} onClick={handleReadClick} className="email-content">
+            <EmailStar email={email} handleStarClick={handleStarClick} onUpdateEmail={onUpdateEmail} />
+            <Link to={`/email/${email._id}`} onClick={handleReadClick} state={{ dateDisplay: dateDisplay }} className="email-content">
                 <span className='email-subject'><h4>{shortSubject}</h4></span>
                 <span className='email-body'><h5>{shortBody}</h5></span>
             </Link>
         </div>
-        <span className='email-date'>{monthName + monthNumber}</span>
+        <span className='email-date'>{dateDisplay}</span>
         <div className="email-actions">
             <span><button onClick={() => onRemoveEmail(email._id)}><FontAwesomeIcon icon={faTrashAlt} /></button></span>
             <span><button><FontAwesomeIcon icon={faEdit} /></button></span>

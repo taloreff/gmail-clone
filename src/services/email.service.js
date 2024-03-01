@@ -12,10 +12,10 @@ export const emailService = {
 
 const STORAGE_KEY = 'emails'
 
-const loggedinUser = {
-    email: 'user@appsus.com',
-    fullname: 'Mahatma Appsus'
-}
+// const loggedinUser = {
+//     email: 'user@appsus.com',
+//     fullname: 'Mahatma Appsus'
+// }
 
 _createEmails()
 
@@ -42,7 +42,6 @@ function remove(id) {
 }
 
 function save(emailToSave) {
-    console.log(emailToSave._id)
     if (emailToSave._id) {
         return storageService.put(STORAGE_KEY, emailToSave)
     } else {
@@ -87,7 +86,7 @@ function _createEmails() {
                 type: 'Cooking',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1554993990900,
+                sentAt: 1709244000000,
                 removedAt: null,
                 from: 'momo@momo.com',
                 to: 'user@appsus.com'
@@ -109,6 +108,162 @@ function _createEmails() {
             {
                 _id: 'e103',
                 subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e104',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e105',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e106',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e107',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e108',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e109',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e110',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e111',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e112',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e113',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e114',
+                subject: 'LinkedIn - See Ronis and other people connections',
+                body: 'Check out their profiles and start a conversation',
+                type: 'Software',
+                isRead: false,
+                isStarred: false,
+                sentAt: 1551133930594,
+                removedAt: null,
+                from: 'toto@toto.com',
+                to: 'user@appsus.com'
+
+            },
+            {
+                _id: 'e115',
+                subject: 'Last Email - See Ronis and other people connections',
                 body: 'Check out their profiles and start a conversation',
                 type: 'Software',
                 isRead: false,

@@ -4,7 +4,7 @@
     gap: 20px;
     padding: 10px 0;
     position: relative;
-    /* Add position: relative to the email-preview */
+    border-bottom: 1px solid #e8edf2;
 }
 
 .email-preview.read {
@@ -20,6 +20,7 @@
         inset -1px 0 0 #dadce0,
         0 1px 2px 0 rgba(60, 64, 67, .3),
         0 1px 3px 1px rgba(60, 64, 67, .15);
+    z-index: 2;
 }
 
 .email-preview:hover .email-actions {
@@ -63,7 +64,8 @@
 }
 
 .email-preview.unread .email-content .email-subject h4,
-.email-preview.unread .email-content .email-body h5 {
+.email-preview.unread .email-content .email-body h5,
+.email-preview.unread .email-date {
     font-weight: 700;
 }
 
@@ -78,6 +80,7 @@
 
 .email-date {
     opacity: 1;
+    padding-right: 20px;
 }
 
 .email-actions {

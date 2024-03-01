@@ -5,12 +5,13 @@
 .emails-list {
     list-style: none;
     padding: 0;
+    margin-bottom: 60px;
 }
 
 .list-container {
-    height: 100%;
+    height: calc(100vh - 50px);
     background-color: #fff;
     border-radius: 16px;
     margin-bottom: 16px;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
