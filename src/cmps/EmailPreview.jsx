@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { EmailStar } from './EmailStar';
@@ -7,6 +7,7 @@ import { EmailStar } from './EmailStar';
 
 export function EmailPreview({ email, onRemoveEmail, onUpdateEmail }) {
 
+    const params = useParams()
     function handleStarClick(ev) {
         ev.preventDefault();
         onUpdateEmail({ ...email, isStarred: !email.isStarred })
@@ -25,29 +26,27 @@ export function EmailPreview({ email, onRemoveEmail, onUpdateEmail }) {
 
     let dateDisplay;
     if (emailDate.getMonth() + 1 === currentMonth && emailDate.getFullYear() === currentYear) {
-        // If the email date is in the current month and year, display the time
         const hours = emailDate.getHours();
         const minutes = emailDate.getMinutes();
         dateDisplay = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`;
     } else {
-        // Otherwise, display the month name and number
         const monthName = emailDate.toLocaleString('en', { month: 'short' });
         const monthNumber = emailDate.getMonth() + 1;
         dateDisplay = `${monthName} ${monthNumber}`;
     }
 
 
-    return <article className={`email-preview ${email.isRead ? "read" : 'unread'}`} >
+    return <article className={`email-preview ${email.isRead ? 'read' : 'unread'}`} >
         <div className="email">
             <EmailStar email={email} handleStarClick={handleStarClick} onUpdateEmail={onUpdateEmail} />
-            <Link to={`/email/${email._id}`} onClick={handleReadClick} state={{ dateDisplay: dateDisplay }} className="email-content">
+            <Link to={`/${params.mailStatus}/${email._id}`} onClick={handleReadClick} className="email-content">
                 <span className='email-subject'><h4>{shortSubject}</h4></span>
                 <span className='email-body'><h5>{shortBody}</h5></span>
             </Link>
         </div>
         <span className='email-date'>{dateDisplay}</span>
         <div className="email-actions">
-            <span><button onClick={() => onRemoveEmail(email._id)}><FontAwesomeIcon icon={faTrashAlt} /></button></span>
+            <span><button onClick={() => onRemoveEmail(email)}><FontAwesomeIcon icon={faTrashAlt} /></button></span>
             <span><button><FontAwesomeIcon icon={faEdit} /></button></span>
         </div>
     </article >

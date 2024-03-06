@@ -83,7 +83,6 @@ input {
 .main-app {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: minmax(72px, 1fr) minmax(800px, auto) minmax(56px, 1fr);
     grid-template-rows: 50px auto;
 }
 

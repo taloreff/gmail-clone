@@ -45,17 +45,13 @@ export function EmailDetails() {
             minute: 'numeric',
             hour12: true,
         };
-
-        // If it's today
         if (currentDate.toDateString() === targetDate.toDateString()) {
             return targetDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) + ' (Today)';
         }
-        // If it's less than 30 days ago
         else if (diffDays < 30) {
             const timeAgo = diffDays === 1 ? 'day ago' : 'days ago';
             return targetDate.toLocaleString('en-US', options) + ` (${diffDays} ${timeAgo})`;
         }
-        // If it's more than 30 days ago
         else {
             return targetDate.toLocaleString('en-US', options);
         }
@@ -89,6 +85,7 @@ export function EmailDetails() {
                 <button>↩︎ Reply</button>
                 <button>↪︎ Forward</button>
             </div>
+
         </section>
     )
 }

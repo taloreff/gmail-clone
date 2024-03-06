@@ -12,23 +12,24 @@ export const emailService = {
 
 const STORAGE_KEY = 'emails'
 
-// const loggedinUser = {
-//     email: 'user@appsus.com',
-//     fullname: 'Mahatma Appsus'
-// }
+const loggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
 
 _createEmails()
 
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
     if (filterBy) {
-        var { subject, body, from, to } = filterBy
+        var { subject, body, from, to, status } = filterBy
         emails = emails.filter(
             email => email.subject.toLowerCase().includes(subject.toLowerCase())
                 || email.from.toLowerCase().includes(from.toLowerCase())
                 || email.from.toLowerCase().includes(body.toLowerCase())
                 || email.to.toLowerCase().includes(to.toLowerCase())
         )
+        emails = filterByFolder(emails, status)
     }
     return emails
 }
@@ -75,6 +76,21 @@ function getDefaultFilter() {
     }
 }
 
+function filterByFolder(emails, status) {
+    switch (status) {
+        case 'inbox':
+            return emails.filter(email => email.to === loggedinUser.email && !email.removedAt && email.sentAt)
+        case 'sent':
+            return emails.filter(email => email.from === loggedinUser.email)
+        case 'starred':
+            return emails.filter(email => email.isStarred)
+        case 'drafts':
+            return emails.filter(email => !email.sentAt)
+        case 'trash':
+            return emails.filter(email => email.removedAt)
+    }
+}
+
 function _createEmails() {
     let emails = utilService.loadFromStorage(STORAGE_KEY)
     if (!emails || !emails.length) {
@@ -89,9 +105,9 @@ function _createEmails() {
                 type: 'Cooking',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1709244000000,
+                sentAt: 1649584000000,
                 removedAt: null,
-                from: 'momo@momo.com',
+                from: 'user@appsus.com',
                 to: 'user@appsus.com'
 
             },
@@ -102,9 +118,9 @@ function _createEmails() {
                 type: 'Software',
                 isRead: true,
                 isStarred: true,
-                sentAt: 1551000000000,
+                sentAt: 1646544000000,
                 removedAt: null,
-                from: 'popo@popo.com',
+                from: 'user@appsus.com',
                 to: 'user@appsus.com'
 
             },
@@ -115,7 +131,7 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
+                sentAt: 1646544000000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
@@ -128,9 +144,9 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
+                sentAt: 1645616400000,
                 removedAt: null,
-                from: 'toto@toto.com',
+                from: 'user@appsus.com',
                 to: 'user@appsus.com'
 
             },
@@ -141,8 +157,8 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
-                removedAt: null,
+                sentAt: null,
+                removedAt: true,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
 
@@ -154,8 +170,8 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
-                removedAt: null,
+                sentAt: 1646457600000,
+                removedAt: true,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
 
@@ -167,7 +183,7 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
+                sentAt: 1646371200000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
@@ -179,8 +195,8 @@ function _createEmails() {
                 body: 'Check out their profiles and start a conversation',
                 type: 'Software',
                 isRead: false,
-                isStarred: false,
-                sentAt: 1551133930594,
+                isStarred: true,
+                sentAt: 1646284800000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
@@ -192,8 +208,8 @@ function _createEmails() {
                 body: 'Check out their profiles and start a conversation',
                 type: 'Software',
                 isRead: false,
-                isStarred: false,
-                sentAt: 1551133930594,
+                isStarred: true,
+                sentAt: 1646198400000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
@@ -206,7 +222,7 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
+                sentAt: 1646198400000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
@@ -219,7 +235,7 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
+                sentAt: 1646112000000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
@@ -232,7 +248,7 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
+                sentAt: 1646112000000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
@@ -244,8 +260,8 @@ function _createEmails() {
                 body: 'Check out their profiles and start a conversation',
                 type: 'Software',
                 isRead: false,
-                isStarred: false,
-                sentAt: 1551133930594,
+                isStarred: true,
+                sentAt: 1646112000000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
@@ -258,7 +274,7 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
+                sentAt: 1646112000000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'
@@ -271,7 +287,7 @@ function _createEmails() {
                 type: 'Software',
                 isRead: false,
                 isStarred: false,
-                sentAt: 1551133930594,
+                sentAt: 1646112000000,
                 removedAt: null,
                 from: 'toto@toto.com',
                 to: 'user@appsus.com'

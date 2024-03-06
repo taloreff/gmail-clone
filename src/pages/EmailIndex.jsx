@@ -1,19 +1,33 @@
 import { useEffect, useState } from "react"
+import { Outlet, useLocation, useParams } from "react-router-dom";
+
 import { emailService } from '../services/email.service'
+
 import { EmailList } from "../cmps/EmailList";
 import { EmailNav } from "../cmps/EmailNav";
+import { EmailFolderList } from "../cmps/EmailFolderList";
+import { UserActions } from "../cmps/UserActions";
 
 export function EmailIndex() {
+    const location = useLocation()
+    const params = useParams()
+
     const [emails, setEmails] = useState(null)
-    const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter(location.pathname))
+    const [selectedEmailId, setSelectedEmailId] = useState(null);
+
 
     useEffect(() => {
         loadEmails()
     }, [filterBy])
 
+    useEffect(() => {
+        onSetFilter(emailService.getDefaultFilter())
+    }, [params.mailStatus])
+
     async function loadEmails() {
         try {
-            const emails = await emailService.query(filterBy)
+            const emails = await emailService.query({ ...filterBy, status: params.mailStatus })
             setEmails(emails)
         } catch (error) {
             console.log('Error in loadEmails', error)
@@ -24,11 +38,11 @@ export function EmailIndex() {
         setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
     }
 
-    async function onRemoveEmail(emailId) {
+    async function onRemoveEmail(currEmail) {
         try {
-            await emailService.remove(emailId)
+            await emailService.save({ ...currEmail, removedAt: true })
             setEmails(prevEmails => {
-                return prevEmails.filter(email => email._id !== emailId)
+                return prevEmails.filter(email => email._id !== currEmail._id)
             })
         } catch (error) {
             console.log('Error in onRemoveEmail', error)
@@ -44,17 +58,25 @@ export function EmailIndex() {
         }
     }
 
+    function handleEmailClick(emailId) {
+        setSelectedEmailId(emailId);
+    }
+
     if (!emails) return <div>Loading..</div>
 
     return (
         <section className="email-index">
             <EmailNav filterBy={filterBy} onSetFilter={onSetFilter} />
+            <EmailFolderList onSetFilter={onSetFilter} />
+            <UserActions />
             <div className="list-container">
                 <EmailList
                     emails={emails}
                     onRemoveEmail={onRemoveEmail}
-                    onUpdateEmail={onUpdateEmail} />
+                    onUpdateEmail={onUpdateEmail}
+                    handleEmailClick={handleEmailClick} />
             </div>
+            {selectedEmailId && <Outlet />}
         </section>
     )
 }

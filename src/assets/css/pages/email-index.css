@@ -1,5 +1,9 @@
 .email-index {
-    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: 64px auto;
+    grid-template-columns: 72px minmax(708px, auto) 56px;
+    gap: 2px;
 }
 
 .emails-list {
@@ -9,6 +13,8 @@
 }
 
 .list-container {
+    grid-column: 2;
+    grid-row: 2;
     height: calc(100vh - 50px);
     background-color: #fff;
     border-radius: 16px;

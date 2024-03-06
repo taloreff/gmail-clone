@@ -1,0 +1,29 @@
+.user-actions {
+    grid-column: 3;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-actions .icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-actions .icon:hover {
+    background-color: rgba(32, 33, 36, 0.059);
+    border-radius: 50%;
+    padding: 10px 6px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-actions .icon img {
+    width: 20px;
+    height: 20px;
+}

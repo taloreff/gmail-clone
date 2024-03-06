@@ -1,5 +1,6 @@
 .email-nav {
-    grid-row: 2;
+    grid-row: 1;
+    grid-column: 1/3;
     background: transparent;
     color: rgb(71, 71, 71);
     display: flex;
@@ -14,11 +15,6 @@
     display: flex;
     align-items: center;
 
-}
-
-.email-nav h1.logo {
-    flex-grow: 1;
-    font-weight: 600;
 }
 
 .email-nav .back {
@@ -45,6 +41,7 @@
 .email-filter-input {
     position: relative;
     min-width: 500px;
+    margin-right: 50%;
 }
 
 .email-filter-icon {
@@ -61,21 +58,24 @@
     border-radius: 24px;
     border: none;
     background-color: #eaf1fb;
-    padding: 10px;
     width: 100%;
-    margin-right: 10px;
+    margin-left: 16px;
     max-width: 500px;
-    padding-left: 30px;
+    padding: 20px 0 20px 50px;
+    height: 48px;
 }
 
 .email-filter-icon {
     color: #444746;
+    opacity: .75;
     border-radius: 50%;
+    padding: 10px;
+    margin-left: 10px;
 }
 
 .email-filter-icon:hover {
-    transition: .5s;
-    background-color: #dadadc;
+    background-color: rgb(221, 227, 236);
+    cursor: pointer;
 }
 
 .email-filter input:focus {
@@ -88,4 +88,23 @@
     flex-grow: 1;
     display: flex;
     justify-content: center;
+}
+
+.email-nav .email-header-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.email-nav .email-header-buttons>* {
+    width: 40px;
+    margin-left: 10px;
+}
+
+.email-nav .email-header-buttons .icon:not(:last-child) img:hover {
+    background-color: rgba(32, 33, 36, 0.059);
+    border-radius: 50%;
+    padding: 10px 8px;
+    text-decoration: none;
+    cursor: pointer;
 }
