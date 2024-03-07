@@ -14,8 +14,6 @@ export function EmailIndex() {
 
     const [emails, setEmails] = useState(null)
     const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter(location.pathname))
-    const [selectedEmailId, setSelectedEmailId] = useState(null);
-
 
     useEffect(() => {
         loadEmails()
@@ -58,10 +56,6 @@ export function EmailIndex() {
         }
     }
 
-    function handleEmailClick(emailId) {
-        setSelectedEmailId(emailId);
-    }
-
     if (!emails) return <div>Loading..</div>
 
     return (
@@ -69,14 +63,15 @@ export function EmailIndex() {
             <EmailNav filterBy={filterBy} onSetFilter={onSetFilter} />
             <EmailFolderList onSetFilter={onSetFilter} />
             <UserActions />
-            <div className="list-container">
+            {params.emailId && <Outlet />}
+            {!params.emailId && <div className="list-container">
                 <EmailList
                     emails={emails}
                     onRemoveEmail={onRemoveEmail}
                     onUpdateEmail={onUpdateEmail}
-                    handleEmailClick={handleEmailClick} />
-            </div>
-            {selectedEmailId && <Outlet />}
+                />
+            </div>}
+
         </section>
     )
 }
