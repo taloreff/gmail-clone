@@ -12,6 +12,22 @@
     margin-bottom: 60px;
 }
 
+.emails-list .action-bar {
+    display: flex;
+    padding-left: 18px;
+}
+
+.select-dropdown {
+    border-radius: 8px;
+    width: 150px;
+    padding: 4px;
+    margin: 4px;
+}
+
+.select-dropdown:focus-visible {
+    outline-color: rgb(118, 118, 118)
+}
+
 .list-container {
     grid-column: 2;
     grid-row: 2;

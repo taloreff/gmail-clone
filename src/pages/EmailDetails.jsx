@@ -25,7 +25,7 @@ export function EmailDetails() {
             const email = await emailService.getById(params.emailId)
             setEmail(email)
         } catch (err) {
-            navigate('/email')
+            navigate(params.mailStatus)
             console.log('Error in loademail', err)
         }
     }
@@ -66,7 +66,7 @@ export function EmailDetails() {
         <section className="email-details">
             <div className="email-details-top">
                 <span>
-                    <Link className="email-details-back" to="/email"><FontAwesomeIcon icon={faArrowLeft} /></Link>
+                    <Link className="email-details-back" to={`/${params.mailStatus}`}><FontAwesomeIcon icon={faArrowLeft} /></Link>
                 </span>
                 <h1 className="email-details-subject">{email.subject}</h1>
             </div>

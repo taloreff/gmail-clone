@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useParams, useSearchParams } from "react-router-dom";
 
 import { emailService } from '../services/email.service'
 
@@ -7,15 +7,17 @@ import { EmailList } from "../cmps/EmailList";
 import { EmailNav } from "../cmps/EmailNav";
 import { EmailFolderList } from "../cmps/EmailFolderList";
 import { UserActions } from "../cmps/UserActions";
+import { EmailCompose } from "../cmps/EmailCompose";
+import { eventBusService } from "../services/event-bus.service";
 
 export function EmailIndex() {
-    const location = useLocation()
     const params = useParams()
-
+    const [searchParams, setSearchParams] = useSearchParams()
     const [emails, setEmails] = useState(null)
-    const [filterBy, setFilterBy] = useState(emailService.getDefaultFilter(location.pathname))
+    const [filterBy, setFilterBy] = useState(emailService.getFilterFromParams(searchParams))
 
     useEffect(() => {
+        updateSearchParams(filterBy)
         loadEmails()
     }, [filterBy])
 
@@ -42,8 +44,10 @@ export function EmailIndex() {
             setEmails(prevEmails => {
                 return prevEmails.filter(email => email._id !== currEmail._id)
             })
+            eventBusService.emit('show-user-msg', { type: 'success', txt: 'Email removed successfully' })
         } catch (error) {
             console.log('Error in onRemoveEmail', error)
+            eventBusService.emit('show-user-msg', { type: 'error', txt: 'Email was not removed successfully' })
         }
     }
 
@@ -51,27 +55,40 @@ export function EmailIndex() {
         try {
             const updatedEmail = await emailService.save(email)
             setEmails(prevEmails => prevEmails.map(currEmail => currEmail._id === updatedEmail._id ? updatedEmail : currEmail))
+            eventBusService.emit('show-user-msg', { type: 'success', txt: 'Email updated successfully' })
         } catch (error) {
             console.log('Error in onUpdateEmail')
+            eventBusService.emit('show-user-msg', { type: 'error', txt: 'Email was not updated successfully' })
         }
     }
 
-    if (!emails) return <div>Loading..</div>
+    function updateSearchParams(updatedParams) {
+        const sanitizedFilterBy = {};
+        for (const field in updatedParams) {
+            if (updatedParams[field] !== "" && updatedParams[field] !== null) {
+                sanitizedFilterBy[field] = updatedParams[field];
+            }
+        }
+        setSearchParams(sanitizedFilterBy);
+    }
 
+    if (!emails) return <div>Loading..</div>
     return (
         <section className="email-index">
             <EmailNav filterBy={filterBy} onSetFilter={onSetFilter} />
-            <EmailFolderList onSetFilter={onSetFilter} />
+            <EmailFolderList filterBy={filterBy} updateSearchParams={updateSearchParams} emails={emails} />
             <UserActions />
             {params.emailId && <Outlet />}
             {!params.emailId && <div className="list-container">
                 <EmailList
+                    onSetFilter={onSetFilter}
+                    filterBy={filterBy}
                     emails={emails}
                     onRemoveEmail={onRemoveEmail}
                     onUpdateEmail={onUpdateEmail}
                 />
             </div>}
-
+            {searchParams.getAll('compose').length && <EmailCompose />}
         </section>
     )
 }

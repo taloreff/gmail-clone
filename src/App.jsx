@@ -5,6 +5,7 @@ import { AboutUs } from './pages/AboutUs'
 import { EmailIndex } from './pages/EmailIndex'
 import { AppHeader } from './cmps/AppHeader'
 import { EmailDetails } from './pages/EmailDetails'
+import { UserMsg } from './cmps/UserMsg'
 
 export function App() {
 
@@ -20,6 +21,7 @@ export function App() {
                     </Route>
                 </Routes>
             </section>
+            <UserMsg />
         </Router>
     )
 }

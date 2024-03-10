@@ -4,14 +4,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 6;
+    background-color: rgb(246, 248, 252);
+    transition: width 1s, align-items 1s;
+
 }
+
+.email-folder-list:hover {
+    width: 256px;
+    align-items: start;
+}
+
+
 
 .email-folder-list nav {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 100%;
+    transition: justify-content 1s, align-items 1s, padding-left 1s, margin-right 1s;
 }
-
 
 .email-folder-list nav a {
     height: 32px;
@@ -21,19 +32,55 @@
     margin-bottom: 4px;
 }
 
+.email-folder-list:hover nav a {
+    justify-content: start;
+    align-items: center;
+    padding-left: 26px;
+    margin-right: 15px;
+    transition: justify-content 1s, align-items 1s, padding-left 1s, margin-right 1s;
+}
+
 .email-folder-list nav a:hover {
     background-color: rgba(32, 33, 36, 0.059);
     border-radius: 50%;
-    padding: 10px 6px;
     text-decoration: none;
 }
 
+.email-folder-list:hover nav a:hover {
+    background-color: rgba(32, 33, 36, 0.059);
+    border-radius: 0 16px 16px 0;
+    text-decoration: none;
+}
 
+.email-folder-list a .folder-image {
+    margin-top: 4px;
+}
 
-.email-folder-list a.active {
+.email-folder-list a.active .folder-image {
     background-color: rgb(211, 227, 253);
     border-radius: 50%;
-    padding: 10px 6px;
+    padding: 4px 6px;
+}
+
+.email-folder-list:hover a.active .folder-image {
+    background: none;
+    border-radius: none;
+    padding: 0;
+}
+
+.email-folder-list:hover nav img {
+    margin-right: 18px;
+}
+
+.email-folder-list:hover nav button {
+    border: none;
+    background-color: transparent;
+}
+
+.email-folder-list:hover a.active {
+    box-shadow: inset 0 0 0 1px #aaa;
+    background-color: rgba(32, 33, 36, 0.122);
+    border-radius: 0 16px 16px 0
 }
 
 .email-folder-list a.active:hover {
@@ -51,15 +98,26 @@
     align-items: center;
     border-radius: 16px;
     font-weight: 500;
-    color: #5f6368;
+    color: #36393b;
     height: 56px;
     width: 56px;
     border: none;
-    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 1px 3px 1px rgba(60, 64, 67, 0.149);
     background-color: rgb(194, 231, 255);
     margin-bottom: 10px;
+    transition: width 1s, margin-left 1s;
 }
 
+
 .email-folder-list .compose-btn:hover {
-    cursor: pointer;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 1px 3px 1px rgba(60, 64, 67, 0.149);
+}
+
+.email-folder-list:hover .compose-btn {
+    width: 60%;
+    margin-left: 10px;
+}
+
+.email-folder-list .unread-count {
+    margin-left: auto;
+    margin-right: 15px;
 }

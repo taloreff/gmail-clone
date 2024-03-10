@@ -1,5 +1,4 @@
 
-import PropTypes from 'prop-types';
 
 export function Icon({ iconData }) {
     return (
@@ -11,7 +10,3 @@ export function Icon({ iconData }) {
         </div>
     )
 }
-
-Icon.propTypes = {
-    iconData: PropTypes.object.isRequired
-};

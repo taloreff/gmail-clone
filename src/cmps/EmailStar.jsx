@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
-import PropTypes from 'prop-types';
+import { faStar as faGoldstar } from '@fortawesome/free-solid-svg-icons';
 
 export function EmailStar({ email, handleStarClick, onUpdateEmail }) {
 
@@ -9,12 +9,7 @@ export function EmailStar({ email, handleStarClick, onUpdateEmail }) {
         onUpdateEmail({ ...email, isStarred: !email.isStarred });
     }}>
         {email.isStarred ?
-            <FontAwesomeIcon icon={faStar} style={{ color: "#FFD43B", }} /> :
-            <FontAwesomeIcon icon={faStar} />}</span>
+            <FontAwesomeIcon icon={faGoldstar} style={{ color: "#FFD43B", }} /> :
+            <FontAwesomeIcon icon={faStar} style={{ color: "#a1a1a1", }} />}</span>
 }
 
-EmailStar.propTypes = {
-    handleStarClick: PropTypes.func.isRequired,
-    onUpdateEmail: PropTypes.func.isRequired,
-    email: PropTypes.object.isRequired
-};

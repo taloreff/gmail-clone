@@ -16,3 +16,5 @@
 @import "./cmps/email-preview.css";
 @import "./cmps/email-folder-list.css";
 @import "./cmps/user-actions.css";
+@import "./cmps/email-compose.css";
+@import "./cmps/user-msg.css";

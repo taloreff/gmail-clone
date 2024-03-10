@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 export function EmailFilter({ filterBy, onSetFilter }) {
@@ -35,8 +34,3 @@ export function EmailFilter({ filterBy, onSetFilter }) {
         </form>
     );
 }
-
-EmailFilter.propTypes = {
-    filterBy: PropTypes.object.isRequired,
-    onSetFilter: PropTypes.func.isRequired,
-};

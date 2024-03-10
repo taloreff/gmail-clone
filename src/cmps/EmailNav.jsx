@@ -3,7 +3,6 @@ import questionUrl from "../assets/imgs/question_mark.svg";
 import settings from "../assets/imgs/settings.svg";
 import apps from "../assets/imgs/apps.svg";
 import user from "../assets/imgs/user_img.png";
-import PropTypes from 'prop-types';
 
 import { EmailFilter } from './EmailFilter'
 import { Icon } from './Icon';
@@ -29,7 +28,3 @@ export function EmailNav({ filterBy, onSetFilter }) {
     </nav>
 }
 
-EmailNav.propTypes = {
-    filterBy: PropTypes.object.isRequired,
-    onSetFilter: PropTypes.func.isRequired,
-};

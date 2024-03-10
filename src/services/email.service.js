@@ -1,35 +1,39 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 
+export const loggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
+
 export const emailService = {
     query,
     save,
     remove,
     getById,
     createEmail,
-    getDefaultFilter
+    getDefaultFilter,
+    getFilterFromParams,
 }
 
 const STORAGE_KEY = 'emails'
 
-const loggedinUser = {
-    email: 'user@appsus.com',
-    fullname: 'Mahatma Appsus'
-}
+
 
 _createEmails()
 
 async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY)
     if (filterBy) {
-        var { subject, body, from, to, status } = filterBy
+        var { subject, body, from, to, status, isRead } = filterBy
         emails = emails.filter(
             email => email.subject.toLowerCase().includes(subject.toLowerCase())
                 || email.from.toLowerCase().includes(from.toLowerCase())
-                || email.from.toLowerCase().includes(body.toLowerCase())
+                || email.body.toLowerCase().includes(body.toLowerCase())
                 || email.to.toLowerCase().includes(to.toLowerCase())
         )
         emails = filterByFolder(emails, status)
+        emails = filterBySelect(emails, isRead)
     }
     return emails
 }
@@ -67,7 +71,7 @@ function getDefaultFilter() {
     return {
         subject: '',
         body: '',
-        isRead: false,
+        isRead: null,
         isStarred: false,
         sentAt: null,
         removedAt: null, //for later use
@@ -81,14 +85,38 @@ function filterByFolder(emails, status) {
         case 'inbox':
             return emails.filter(email => email.to === loggedinUser.email && !email.removedAt && email.sentAt)
         case 'sent':
-            return emails.filter(email => email.from === loggedinUser.email)
+            return emails.filter(email => email.from === loggedinUser.email && !email.removedAt)
         case 'starred':
-            return emails.filter(email => email.isStarred)
+            return emails.filter(email => email.isStarred && !email.removedAt)
         case 'drafts':
-            return emails.filter(email => !email.sentAt)
+            return emails.filter(email => !email.sentAt && !email.removedAt)
         case 'trash':
             return emails.filter(email => email.removedAt)
     }
+}
+
+function filterBySelect(emails, isRead) {
+    switch (isRead) {
+        case true:
+            return emails.filter(email => email.isRead)
+        case false:
+            return emails.filter(email => !email.isRead)
+        default:
+            return emails
+    }
+}
+
+function getFilterFromParams(searchParams) {
+    const defaultFilter = getDefaultFilter()
+    const filterBy = {}
+    for (const field in defaultFilter) {
+        filterBy[field] = searchParams.get(field) || defaultFilter[field]
+    }
+    return filterBy
+}
+
+function sortEmails(emails) {
+    return emails.sort((a, b) => b.sentAt - a.sentAt)
 }
 
 function _createEmails() {
@@ -294,6 +322,7 @@ function _createEmails() {
 
             },
         ]
+        sortEmails(emails)
         utilService.saveToStorage(STORAGE_KEY, emails)
     }
 }

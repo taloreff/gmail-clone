@@ -1,0 +1,86 @@
+.email-compose .email-compose-container {
+    width: 100%;
+    position: absolute;
+    max-width: 1345px;
+    border-radius: 8px 8px 0 0;
+    -webkit-box-shadow: 0px 8px 10px 1px rgba(0, 0, 0, .14), 0px 3px 14px 2px rgba(0, 0, 0, .12), 0px 5px 5px -3px rgba(0, 0, 0, .2);
+    box-shadow: 0px 8px 10px 1px rgba(0, 0, 0, .14), 0px 3px 14px 2px rgba(0, 0, 0, .12), 0px 5px 5px -3px rgba(0, 0, 0, .2);
+    background-color: white;
+    width: 600px;
+    max-height: 576px;
+    right: 56px;
+    bottom: 0;
+    z-index: 3;
+}
+
+.email-compose input,
+.email-compose header,
+.email-compose textarea,
+.email-compose textarea:focus-visible,
+.email-compose input:focus-visible {
+    width: 100%;
+    border: none;
+    padding: 10px 16px;
+    outline-color: transparent;
+    font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+    outline: none;
+}
+
+
+.email-compose .header-container {
+    display: flex;
+    background-color: rgb(234, 241, 251);
+    border-radius: 10px;
+}
+
+.email-compose .icon {
+    position: relative;
+    top: 0;
+    padding: 5px;
+}
+
+.email-compose .icon img {
+    padding: 5px;
+}
+
+.email-compose .icon:hover {
+    cursor: pointer;
+}
+
+.email-compose button {
+    background-color: transparent;
+    border: none;
+}
+
+.email-compose .send {
+    border-radius: 18px;
+    background-color: rgb(11, 87, 208);
+    color: white;
+    width: 104px;
+    padding: 5px;
+    margin: 15px;
+    border-color: transparent;
+    font-size: 16px;
+    font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+}
+
+.email-compose form {
+    background-color: white;
+}
+
+.email-compose hr {
+    width: 96%;
+    border-color: rgba(236, 239, 241, 0.5);
+}
+
+.material-symbols-outlined {
+    padding-top: 5px;
+}
+
+.material-symbols-outlined:last-child {
+    padding-right: 5px;
+}
+
+.material-symbols-outlined:hover {
+    cursor: pointer;
+}
